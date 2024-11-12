@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const helmet = require("helmet");
-const searchRecipes = require("./utils/recipe-api");
-const getRecipeSummary = require("./utils/recipe-api");
+const mainRouter = require("./routes/index");
+const { searchRecipes, getRecipeSummary } = require("./utils/recipe-api");
 
 const app = express();
 const { PORT = 3002 } = process.env;
@@ -22,11 +22,13 @@ mongoose
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use("/", mainRouter);
 app.get("/api/recipes/search", async (req, res) => {
   const searchTerm = req.query.searchTerm;
   const page = parseInt(req.query.page);
 
   const results = await searchRecipes(searchTerm, page);
+  console.log({ results });
   return res.json(results);
 });
 

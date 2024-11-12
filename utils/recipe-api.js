@@ -3,9 +3,11 @@ const baseURL = "https://api.spoonacular.com/recipes/complexSearch";
 
 async function searchRecipes(searchTerm, page) {
   const API_KEY = "c6013385c64948a4a5ca580917d7c99a";
+  console.log("string");
   if (!API_KEY) {
     throw new Error("API key is not found");
   }
+  console.log("some other string");
   const baseURL = "https://api.spoonacular.com/recipes/complexSearch";
   const url = new URL(baseURL);
 
@@ -17,19 +19,18 @@ async function searchRecipes(searchTerm, page) {
   };
 
   url.search = new URLSearchParams(queryParams).toString();
+  console.log(url);
 
   try {
-    const searchResponse = await fetch(url);
-    const resultsJson = await searchResponse.json();
-    return resultsJson;
+    const searchResponse = await fetch(url.toString());
+    const results = await searchResponse.json();
+    return results;
   } catch (error) {
     console.log(error);
   }
 }
 
 console.log(searchRecipes);
-
-module.exports = searchRecipes;
 
 const getRecipeSummary = async (recipeId) => {
   const API_KEY = "c6013385c64948a4a5ca580917d7c99a";
@@ -46,12 +47,13 @@ const getRecipeSummary = async (recipeId) => {
 
   url.search = new URLSearchParams(params).toString();
   try {
-    const response = await fetch(url);
+    const response = await fetch(url.toString());
     const json = await response.json();
+    console.log(response);
     return json;
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = getRecipeSummary;
+module.exports = { getRecipeSummary, searchRecipes };
