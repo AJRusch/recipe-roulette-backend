@@ -3,8 +3,6 @@ const {
   getRecipeItems,
   createRecipecard,
   deleteRecipeCard,
-  favoriteItem,
-  unFavoriteItem,
   saveRecipe,
 } = require("../controllers/recipeItems");
 
@@ -14,12 +12,9 @@ const {
 } = require("../middlewares/validation");
 const auth = require("../middlewares/auth");
 
-router.get("/", getRecipeItems);
-router.use(auth);
-router.post("/", validateRecipeCard, saveRecipe);
+router.get("/", auth, getRecipeItems);
+router.post("/", auth, validateRecipeCard, saveRecipe);
 router.post("/", validateRecipeCard, createRecipecard);
-router.delete("/:recipeId", validateRecipeCardId, deleteRecipeCard);
-router.put("/:recipeId/favorites", validateRecipeCardId, favoriteItem);
-router.delete("/:recipeId/favorites", validateRecipeCardId, unFavoriteItem);
+router.delete("/:recipeId", auth, validateRecipeCardId, deleteRecipeCard);
 
 module.exports = router;
