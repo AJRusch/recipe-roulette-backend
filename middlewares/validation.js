@@ -71,7 +71,7 @@ module.exports.validateRecipeCard = celebrate({
 
 module.exports.validateRecipeCardId = celebrate({
   params: Joi.object().keys({
-    recipeId: Joi.string().hex().length(6).required().messages({
+    recipeId: Joi.string().hex().length(24).required().messages({
       "string.hex": "Invalid Recipe ID format",
       "string.length": "Invalid Recipe ID length",
       "any.required": "Recipe ID is required",
