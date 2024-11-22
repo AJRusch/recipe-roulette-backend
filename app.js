@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 const helmet = require("helmet");
 const mainRouter = require("./routes/index");
 const { searchRecipes, getRecipeSummary } = require("./utils/recipe-api");
