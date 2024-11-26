@@ -12,10 +12,10 @@ const getRecipeItems = (req, res, next) => {
 
 const saveRecipe = (req, res, next) => {
   const { title, summary, imageUrl } = req.body;
-
   RecipeCard.create({ title, summary, imageUrl, owner: req.user._id })
     .then((recipe) => {
       res.send({ data: recipe });
+      console.log(req.body);
     })
     .catch((err) => {
       console.error(err);

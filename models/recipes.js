@@ -28,17 +28,6 @@ const recipeCardSchema = new mongoose.Schema({
     },
   },
 
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: User,
-    required: true,
-  },
-
-  favorites: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
-    default: [],
-  },
-
   createdAt: {
     type: Date,
     default: Date.now,
