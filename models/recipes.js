@@ -7,17 +7,15 @@ const recipeCardSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLength: 4,
-    maxLength: 40,
   },
 
   summary: {
     type: String,
     required: true,
     minLength: 20,
-    maxLength: 600,
   },
 
-  imageUrl: {
+  image: {
     type: String,
     required: true,
     validate: {
@@ -28,10 +26,7 @@ const recipeCardSchema = new mongoose.Schema({
     },
   },
 
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
 });
 
 module.exports = mongoose.model("recipe", recipeCardSchema);

@@ -50,20 +50,18 @@ module.exports.validateUpdateUserInfo = celebrate({
 
 module.exports.validateRecipeCard = celebrate({
   body: Joi.object().keys({
-    title: Joi.string().required().min(5).max(40).messages({
+    title: Joi.string().required().min(5).messages({
       "string.min": 'The minimum length of the "title" field is 2',
-      "string.max": 'The maximum length of the "title" field is 40',
       "string.empty": 'the "title" field must be filled in',
     }),
 
-    imageUrl: Joi.string().required().custom(validateURL).messages({
+    image: Joi.string().required().custom(validateURL).messages({
       "string.empty": 'The "imageUrl" field must be filled in',
       "string.uri": 'the "imageUrl" field must be a valid url',
     }),
 
-    summary: Joi.string().required().min(20).max(600).messages({
-      "string.min": 'The minimum length of the "title" field is 20',
-      "string.max": 'The maximum length of the "title" field is 600',
+    summary: Joi.string().required().min(20).messages({
+      "string.min": 'The minimum length of the "summary" field is 20',
       "string.empty": 'the "summary" field must be filled in',
     }),
   }),

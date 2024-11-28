@@ -11,8 +11,8 @@ const getRecipeItems = (req, res, next) => {
 };
 
 const saveRecipe = (req, res, next) => {
-  const { title, summary, imageUrl } = req.body;
-  RecipeCard.create({ title, summary, imageUrl, owner: req.user._id })
+  const { title, summary, image } = req.body;
+  RecipeCard.create({ title, summary, image, owner: req.user._id })
     .then((recipe) => {
       res.send({ data: recipe });
       console.log(req.body);
@@ -26,12 +26,13 @@ const saveRecipe = (req, res, next) => {
     });
 };
 
-const createRecipecard = (req, res, next) => {
-  const { title, summary, imageUrl } = req.body;
+const createRecipeCard = (req, res, next) => {
+  const { title, summary, image } = req.body;
 
-  RecipeCard.create({ title, summary, imageUrl, owner: req.user._id })
+  RecipeCard.create({ title, summary, image, owner: req.user._id })
     .then((recipe) => {
       res.send({ data: recipe });
+      console.log(req.body);
     })
     .catch((err) => {
       console.error(err);
@@ -70,6 +71,6 @@ const deleteRecipeCard = (req, res, next) => {
 module.exports = {
   getRecipeItems,
   saveRecipe,
-  createRecipecard,
+  createRecipeCard,
   deleteRecipeCard,
 };
