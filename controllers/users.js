@@ -6,9 +6,8 @@ const BadRequestError = require("../utils/error-constructors/BadRequestError");
 const ConflictError = require("../utils/error-constructors/ConflictError");
 const NotFoundError = require("../utils/error-constructors/NotFoundError");
 const UnauthorizedError = require("../utils/error-constructors/UnauthorizedError");
-
-const { JWT_SECRET } = require("../utils/config");
 const { SUCCESSFUL_REQUEST } = require("../utils/successStatus");
+const JWT_SECRET = process.env.JWT_SECRET || "some-secret-key";
 
 const createUser = (req, res, next) => {
   const { name, email, password } = req.body;

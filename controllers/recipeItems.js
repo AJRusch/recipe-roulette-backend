@@ -11,11 +11,11 @@ const getRecipeItems = (req, res, next) => {
 };
 
 const saveRecipe = (req, res, next) => {
-  const { title, summary, imageUrl } = req.body;
-
-  RecipeCard.create({ title, summary, imageUrl, owner: req.user._id })
+  const { title, summary, image } = req.body;
+  RecipeCard.create({ title, summary, image, owner: req.user._id })
     .then((recipe) => {
       res.send({ data: recipe });
+      console.log(req.body);
     })
     .catch((err) => {
       console.error(err);
@@ -26,12 +26,13 @@ const saveRecipe = (req, res, next) => {
     });
 };
 
-const createRecipecard = (req, res, next) => {
-  const { title, summary, imageUrl } = req.body;
+const createRecipeCard = (req, res, next) => {
+  const { title, summary, image } = req.body;
 
-  RecipeCard.create({ title, summary, imageUrl, owner: req.user._id })
+  RecipeCard.create({ title, summary, image, owner: req.user._id })
     .then((recipe) => {
       res.send({ data: recipe });
+      console.log(req.body);
     })
     .catch((err) => {
       console.error(err);
@@ -67,50 +68,9 @@ const deleteRecipeCard = (req, res, next) => {
     });
 };
 
-const favoriteItem = (req, res, next) => {
-  RecipeCard.findByIdAndUpdate(
-    req.params.recipeId,
-    { $addToSet: { favorites: req.user._id } },
-    { new: true }
-  )
-    .orFail()
-    .then((recipe) => res.send({ recipe }))
-    .catch((err) => {
-      console.error(err);
-      if (err.name === "DocumentNotFoundError") {
-        return next(new NotFoundError("Recipe not found"));
-      }
-      if (err.name === "CastError") {
-        return next(new BadRequestError("Invalid Recipe ID"));
-      }
-      return next(err);
-    });
-};
-
-const unFavoriteItem = (req, res, next) => {
-  RecipeCard.findByIdAndUpdate(
-    req.params.recipeId,
-    { $pull: { favorites: req.user._id } },
-    { new: true }
-  )
-    .orFail()
-    .then((recipe) => res.send({ recipe }))
-    .catch((err) => {
-      if (err.name === "DocumentNotFoundError") {
-        return next(new NotFoundError("Recipe not found"));
-      }
-      if (err.name === "CastError") {
-        return next(new BadRequestError("Invalid Recipe ID"));
-      }
-      return next(err);
-    });
-};
-
 module.exports = {
   getRecipeItems,
   saveRecipe,
-  createRecipecard,
+  createRecipeCard,
   deleteRecipeCard,
-  favoriteItem,
-  unFavoriteItem,
 };
