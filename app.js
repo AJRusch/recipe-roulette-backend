@@ -10,14 +10,21 @@ const { searchRecipes, getRecipeSummary } = require("./utils/recipe-api");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
 const errorHandler = require("./middlewares/error-handler");
 const { mongoServerAddress } = require("./utils/config");
-const corsOptions = {
+/*const corsOptions = {
   origin: [
     "https://reciperoulette.twilightparadox.com",
     "https://www.reciperoulette.twilightparadox.com",
   ],
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
+}; */
+
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
+app.use(cors(corsOptions));
 
 const app = express();
 const { PORT = 3002 } = process.env;
