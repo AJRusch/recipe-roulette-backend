@@ -22,7 +22,11 @@ mongoose
   .catch(console.error);
 
 app.use(helmet());
-app.use(cors());
+//app.use(cors());
+app.use(cors({
+  origin: ['https://reciperoulette.twilightparadox.com', 'https://www.reciperoulette.twilightparadox.com']
+}));
+
 app.use(limiter);
 app.use(express.json());
 app.use(requestLogger);
