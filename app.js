@@ -24,7 +24,6 @@ const corsOptions = {
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
-app.use(cors(corsOptions));
 
 const app = express();
 const { PORT = 3002 } = process.env;
