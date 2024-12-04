@@ -37,7 +37,8 @@ mongoose
 
 app.use(helmet());
 //app.use(cors());
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(limiter);
 app.use(express.json());
