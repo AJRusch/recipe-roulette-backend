@@ -11,7 +11,6 @@ const recipeCardSchema = new mongoose.Schema({
 
   summary: {
     type: String,
-    required: true,
     minLength: 20,
   },
 

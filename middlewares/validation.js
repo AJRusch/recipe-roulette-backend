@@ -60,7 +60,7 @@ module.exports.validateRecipeCard = celebrate({
       "string.uri": 'the "imageUrl" field must be a valid url',
     }),
 
-    summary: Joi.string().required().min(20).messages({
+    summary: Joi.string().min(20).messages({
       "string.min": 'The minimum length of the "summary" field is 20',
       "string.empty": 'the "summary" field must be filled in',
     }),

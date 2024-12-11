@@ -11,7 +11,7 @@ async function searchRecipes(searchTerm, page) {
   const queryParams = {
     apiKey: API_KEY,
     query: searchTerm,
-    number: "12",
+    number: "9",
     offset: (page * 10).toString(),
   };
 
